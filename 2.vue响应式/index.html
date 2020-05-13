@@ -9,26 +9,69 @@
 
 <body>
     <div id="app">
-        {{ msg }}
-        {{ mrsDeng.age }}
+        <!-- {{ msg }} -->
+        {{ mrsDeng }}
+        <!-- {{ dengfamily }} -->
     </div>
     <script src="./vue.js"></script>
     <script>
         const vm = new Vue({
-            el:"#app",
-            data:{
-                msg:'橙橙可爱！',
-                mrsDeng:{
-                    name:"邓哥",
-                    age:88,
-                    son:"小宝"
-
-                }
+            el: "#app",
+            data: {
+                msg: '橙橙可爱！',
+                mrsDeng: {
+                    name: "邓哥",
+                    age: 88,
+                    son: "小宝"
+                },
+                dengfamily:["邓哥","小刘","王小宝"]
             }
-            
+
         })
 
-        console.log(vm);
+        // console.log(vm)
+
+        // vm.msg = "莫菲你是？";
+        // console.log(vm.msg, vm.$el.innerText);
+        // vm.msg = "莫菲你是？ggg";
+        // console.log(vm.msg, vm.$el.innerText);
+        // vm.msg = "莫菲你是？hjjj";
+        // console.log(vm.msg, vm.$el.innerText);
+
+        // setInterval(() => {
+        //     console.log(vm.msg, vm.$el.innerText);
+
+        // }, 0)
+
+        // vm.$nextTick(()=>{
+        //     console.log(vm.msg, vm.$el.innerText);
+        // })
+            // vm.$nextTick().then(()=>{
+            //     console.log(vm.msg, vm.$el.innerText);
+            // })
+        //$nextTick() 内部实现
+        // if(typeof Promise !=='undefined'){  微
+
+        // }else if(typeof MutationObserver !=='undefined'){微
+
+        // }else if(typeof setImmediate !=='undefined'){宏
+
+        // }else if (typeof setTimeout !=='undefined')宏
+
+
+
+        //数组  以上两种没法重新渲染
+        // 1.改变长度
+        // 2.通过索引值改变   
+        //1.变异方法,push,pop,shift,unshift,splice,sort,reverse
+        //2.vm.$set(vm.dengfamily,2,"小王") Vue.set(要改谁,改哪个,改成什么)
+        //3.vm.$delete(vm.dengfamily,2)
+
+        //对象 增删对象无法重新渲染,只能通过以下方法
+        //1.vm.$set(vm.mrsDeng,"wife","小王") Vue.set(要改谁,改哪个,改成什么)
+        //2.vm.$delete(vm.mrsDeng,2)
+
+//数据劫持 Object.defineProperty
     </script>
 </body>
 
