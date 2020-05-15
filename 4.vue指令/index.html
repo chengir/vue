@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<style>
+  [v-loack] {
+    display: none;
+  }
+</style>
+
+<body>
+
+  <!-- 1.v-pre  跳过编译   <div id="app" v-pre>{{ msg }}</div> -->
+  <!-- 2.v-clock 可以解决闪烁问题，直到关联实例结束编译 -->
+  <!-- 3.v-once 只渲染一次  <div id="app">
+                            <div v-once>{{ msg }}</div>只渲染一次
+                            <div>{{ msg }}</div></div>-->
+  <!-- 4.v-text 更新的textContent  替换所有的文本  <div v-text="msg">-----------</div>
+   {{}} 插值表达式 mustache 只替换自己    
+  v-text 优先级高于{{}}
+  textContent 会获取所有元素,包括style,css 不会重排
+ innerText 受Css影响 ,会触发重排 reflow
+ vue使用textContent 是从性能上考虑  -->
+<!--  <ul class="list">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+
+  <script>
+    const oList = document.getElementsByClassName("list");
+
+    console.time("innerText");
+    for (let i = 0; i < oList.childElementCount; i++) {
+      ul.children[i].innerText = "innerText";
+    }
+
+    console.timeEnd("innerText");
+    console.time("textContent");
+    for (let i = 0; i > oList.childElementCount; i++) {
+
+      ul.children[i].textContent;
+      "innerText";
+    }
+    console.timeEnd("textContent");
+  </script> -->
+
+
+
+ <!-- 5.v-html 非常危险 容易导致Xss攻击 -->
+<!-- 
+ <input type="text">
+<button>点击</button>
+<div id="app">
+  <div v-html="msg"></div>
+</div>
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: "我好美！"
+      }
+    })
+
+    const oInput=document.getElementsByTagName("input")[0];
+    const oButton=document.getElementsByTagName("button")[0];
+    let msg=null;
+    oButton.onclick=function(){
+      vm.msg=oInput.value;
+    }
+  </script> -->
+</body>
+
+</html>
