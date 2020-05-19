@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ul v-if="isShow">
+            <!-- <li v-for="(person,index) of persons">
+                {{ person.name }}---{{ person.age }}==={{ index }}
+            </li>
+            <li v-for="(value,key,index) of chen">{{ value }}---{{ key }}---{{ index }}
+            </li>
+            <li v-for="n in 10">{{ n }}</li>
+            <li v-for="str in 'chen'">{{ str }}</li>
+            <template v-for="(person,index) in persons">
+                <span>{{ index }}</span>
+                <span> {{ person.name }}</span>
+                <h4>{{ person.age }}</h4>
+            </template> -->
+
+            <!-- <li v-for="(person,index) of persons" :key='person.name'>
+                {{ person.name }}
+                <input type="text">
+                <button @click="handleClick(index)">下移</button>
+            </li> -->
+
+            <!-- <button @click='show=!show'>{{ show? 'show':'hide' }}</button>
+            <input type="text" v-if="show" key='a'>
+            <input type="text" v-else key='b'> -->
+
+           <!-- <li v-for="ative in isActive" v-if="isActive" :key='person.name'>
+               {{ ative.name }}
+           </li>  -->
+
+           <li v-for="person in persons" :key='person.name'>
+               {{ person.name }}
+           </li>
+
+
+        </ul>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {show:true,
+                persons: [{
+                        name: '橙橙',
+                        age: 3,
+                        isActive:false
+                    }, {
+                        name: '罗小',
+                        age: 32,
+                        isActive:true
+                    },
+                    {
+                        name: '罗大',
+                        age: 55,
+                        isActive:true
+                    },
+                    {
+                        name: '陈鹏',
+                        age: 32,
+                        isActive:false
+                    }
+                ],
+                isActive:[],
+                isShow:true,
+                chen:{
+                    name:'chen',
+                    age:32,
+                    weight:'48kg'
+                }
+            },
+            methods:{
+                handleClick(index){
+                    const deleteItem=this.persons.splice(index,1);
+                    // console.log(deleteItem);
+                    this.persons.splice(index+1,0,...deleteItem);
+                }
+            }
+
+        })
+        vm.isActive=vm.persons.filter(person=>person.isActive)
+    </script>
+
+</body>
+
+</html>
