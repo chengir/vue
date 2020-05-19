@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="vue.js"></script>
+
+<body>
+    <div id="app">
+        <!-- <img v-bind:src="imageSrc" alt=""> -->
+        <div v-bind:[a]="key">chengcheng</div>
+        <img :src="'https://'+imageSrc" alt="">
+        <div v-bind="{id:someProp,'other-attr':otherPorp}"></div>
+        <div :class="[classA,classB]"></div>
+        <div :class="[isRed ? activeClass:'',errorClass]"></div>
+        <div :class='classA' class="blue"></div>
+        <div :class='[classA,{classB:isB,classC:isC}]'></div>
+        <div :style="{fontSize:size+'px'}">cheng</div>
+        <div :style="[styleObj,styleObj1]">chen</div>
+        <div :style="{display:['-webkit-box','-ms-flexbox','flex']}"></div>
+        <svg :view-box.camel='viewBox'></svg>
+        <svg viewBox="0 0 100 100"></svg>
+        <div :text-content.prop="text"></div>
+
+
+
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                text:'deng',
+                imageSrc: 'imgm.gmw.cn/attachement/jpg/site215/20200517/3779858549329280096.jpg',
+                key: 'a',
+                a: 'b',
+                someProp: 'c',
+                otherPorp: 'e',
+                isRed: false,
+                isB:false,
+                isC:true,
+                classA: 'red',
+                classB: 'green',
+                classC: 'yellow',
+                errorClass: "error",
+                size:30,
+                styleObj:{
+                    fontSize:'40px',
+                    color:'red',
+                },
+                styleObj1:{
+                    color:'green',
+                    cursor:'pointer',
+                    transform:'translateX(90px)'
+             
+                },
+                viewBox:'0 0 100 100'
+            }
+        })
+    </script>
+</body>
+
+</html>

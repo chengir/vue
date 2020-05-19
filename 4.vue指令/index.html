@@ -26,7 +26,7 @@
   textContent 会获取所有元素,包括style,css 不会重排
  innerText 受Css影响 ,会触发重排 reflow
  vue使用textContent 是从性能上考虑  -->
-<!--  <ul class="list">
+  <!--  <ul class="list">
     <li></li>
     <li></li>
     <li></li>
@@ -149,8 +149,8 @@
 
 
 
- <!-- 5.v-html 非常危险 容易导致Xss攻击 -->
-<!-- 
+  <!-- 5.v-html 非常危险 容易导致Xss攻击 -->
+  <!-- 
  <input type="text">
 <button>点击</button>
 <div id="app">
@@ -172,6 +172,60 @@
       vm.msg=oInput.value;
     }
   </script> -->
+
+  <!-- 6.v-if   0,undefined,"",null都为假值
+    <div id="app">
+  <template v-if=show>
+    <div>4</div>
+    <div>4</div>
+    <div>4</div>
+    <div>4</div>
+  </template>
+</div>
+
+<script>
+  const vm=new Vue({
+    el:"#app",
+    data:{
+      show:"2"
+    }
+  })
+    7.v-else 
+    8.v-else-if
+
+    <div id="app">
+    <div  v-if="type ==='a'">a</div>
+    <div v-else-if="type ==='b'">b</div>
+    <div v-else="type==='c'">c</div>
+   </div>
+
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        show: "",
+        type: 'b'
+      }
+    })
+  </script>
+   -->
+<!-- 9.v-show   只是设display=none  不能用template,v-else,v-else-if
+   v-if 直接不渲染-->
+<div id="app">
+  <div v-show=show>Lorem, ipsum.</div>
+  <div v-if=show>nba</div>
+</div>
+
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      show: ""
+    }
+  })
+</script>
+
 </body>
 
 </html>
