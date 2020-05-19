@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 阻止冒泡事件 -->
+       <!-- <div @click="alert('div')" :style=styleObj>
+           <button @click.stop="alert('button')">点击</button>
+       </div> -->
+
+       <!-- event.preventDefault()阻止默认事件 -->
+       <!-- <form @submit.prevent='onSubmit'>
+           <input type="text">
+       </form> -->
+
+       <!-- 事件捕获模式 先父级再子级-->
+       <!-- <div @click.capture="alert('div')" :style=styleObj>
+        <button @click="alert('button')">点击</button>
+       </div> -->
+
+       <!-- <div @click.self="alert('div')" :style=styleObj>
+        <button @click="alert('button')">点击</button>
+       </div> -->
+
+       <!-- <div @click="alert('div')" :style=styleObj>
+        <button @click.once="alert('button')">点击</button>
+        
+       </div> -->
+
+       <input type="text" @keyup.enter="submit">
+       <input type="text" @keyup.page-down="submit">
+       <input type="text" @keyup.ctrl.v="submit">
+      <button @click.ctrl="submit">点击</button>
+      <button @click.ctrl.exact="submit">点击</button>
+
+       
+    </div>
+    <script>
+        Vue.config.keyCodes.v=86;
+        const vm = new Vue({
+            el: '#app',
+            data:{
+                styleObj:{
+                    backgroundColor:"red"
+                }
+            },
+            methods: {
+                alert(str){alert(str);},
+                onSubmit(){
+                    console.log('submit');
+                },
+                submit(){console.log("a");}
+            }
+        })
+    </script>
+</body>
+
+</html>
