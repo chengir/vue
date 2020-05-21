@@ -13,7 +13,6 @@
     <div id="app">
         <div v-for="area in 2" class="area">
             <h2>{{ area === 1 ? '提问区' : '回答展示区' }}</h2>
-
             <ul>
                 <li v-for="question of questionList" :key='question.id'>
                     <h3>{{ question.title }}</h3>
@@ -42,8 +41,9 @@
                                 <span>{{ choose }}</span>
                             </div>
                         </template>
-                        <!-- answer属性是后加的，刚开始没有，所有要判断一下，如果answer为undefined 就为undefined -->
+                        <!-- answer属性是后加的，刚开始没有，所有要判断一下，必须answer存在才能才toString-->
                         <span v-else>{{ question.answer && question.answer.toString() }}</span>
+                        
                     </div>
 
                     <!-- 问答题 -->
