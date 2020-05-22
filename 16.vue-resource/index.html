@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <!-- resource 是一个库，$http可以发送请求-->
+    <script src="./vue-resource.js"></script>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="username">
+            <input type="text" placeholder="用户名" v-model="name">
+        </div>
+        <div class="mail">
+            <input type="text" placeholder="邮箱" v-model="mail">
+        </div>
+        <div class="upload-btn" @click="handleUpload">上传</div>
+        <div class="test-btn" @click="handldTest">调试jsonp</div>
+        <div class="show-btn" @click="handldShow">显示人物信息</div>
+        <ul class="person-list" v-if="personList.length">
+            <li class="person" v-for="person in personList">
+                <span>{{ person.name }}</span>
+                <span>{{ person.mail }}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                name: '',
+                mail: '',
+                msg: '',
+                personList: []
+            },
+            methods: {
+                handleUpload() {
+                    this.$http.post('https://developer.duyiedu.com/vue/setUserInfo', {
+                        name: this.name,
+                        mail: this.mail
+                    }).then(res => {
+                        this.msg = res.body.msg;
+                    }).catch(error => {
+                        this.msg = error.body.msg;
+                    })
+                },
+                handldShow() {
+                    this.$http.get('https://developer.duyiedu.com/vue/getUserInfo').then(res => {
+                        this.personList = res.body.data;
+                        return res.json();//res.json()是一个promise
+                    }).then(res=>{   
+                        console.log(res); //res才是json格式的数据
+                    })
+                },
+                handldTest() {
+                    this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su', {
+                            params: {
+                                wd: '百度',
+                            },
+                            jsonp: 'cb', //jsonp默认是callback,百度缩写成了cb，所以需要指定下 
+                        }).then(res => {
+                        console.log(res);
+                    })
+                }
+            },
+            watch: {
+                msg() {
+                    if (this.msg === '') {
+                        return;
+                    }
+                    alert(this.msg);
+                    this.msg = '';
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
