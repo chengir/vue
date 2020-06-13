@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div @click="handleClick">点击事件</div>
+        {{ msg }}
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "cheng cheng ke ai!",
+                timer: 0,
+            },
+            beforeCreate() {
+                console.log(this.msg);
+                console.log(this.handleClick);
+                console.log('-----------beforeCreate------');
+            },
+            created() {
+                console.log(this.msg);
+                console.log(this.handleClick);
+                console.log(this.$el);
+                console.log('----------created-----------');
+                this.timer = setInterval(() => {
+                    console.log('yyy');
+                }, 500)
+            },
+            beforeMount() {
+                console.log(this.$el);
+                console.log('------beforeMount----');
+            },
+            mounted() {
+                console.log(this.$el);
+                console.log('----mounted----');
+            },
+            beforeUpdate() {
+                console.log(this.msg);
+                console.log(this.$el);
+            },
+            beforeDestroy() {
+                clearInterval(this.timer);
+                console.log("----beforeDestroy------");
+            },
+            destroyed() {
+                console.log("----destroy------");
+            },
+
+            methods: {
+                handleClick() {
+                    console.log("xxxxxxxx");
+                }
+            },
+            watch: {
+                msg: {
+                    handler() {
+                        console.log("侦听msg的值");
+                    },
+                    immediate: true,
+                }
+            }
+        })
+        this.msg = 'xxx';
+    </script>
+
+</body>
+
+</html>
