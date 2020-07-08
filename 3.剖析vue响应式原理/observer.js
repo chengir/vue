@@ -79,4 +79,3 @@ function $delete(data, key) {
 
 observer(data);
 
-const value = $set(data, 'school', 'zhangdian');

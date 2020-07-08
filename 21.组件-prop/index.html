@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="./vue.js"></script>
+    <script src="./axios.js"></script>
+</head>
+
+<body>
+    <div class="" id="app">
+        <!-- 注意:video-list 不能写成:videoList -->
+        <video-list :video-list="videoList"></video-list>
+    </div>
+
+
+    <script>
+        // 全局组件
+        Vue.component('video-list', {
+            props: ['videoList'],
+            // template: `
+            // <div class="video-list">
+            //     <video-item v-for="video in videoList" :key='video.id'
+            //     :poster='video.poster'
+            //     :play='video.play' 
+            //     :rank='video.rank'
+            //     :title='video.title'>
+            // </video-item>
+            // </div>
+            // `
+
+            //v-bind = "video" 传递全局属性
+                template:`
+                <div class="video-list">
+                <video-item v-for="video in videoList" :key='video.id'
+                v-bind = "video">
+                </video-item>
+                </div>
+                `
+        })
+        Vue.component('video-item', {
+            props: ['poster', 'play', 'rank', 'title'],
+            template: `
+            <div class="video-item">
+                <div class="poster">
+                    <img :src="poster" :alt="title">
+                    <div class="info">
+                        <div class="play">{{ play }}</div>
+                        <div class="rank">{{ rank }}</div>
+                    </div>
+                </div>
+                <div class="title">{{ title }}</div>
+            </div>
+            `
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                videoList: []
+            },
+            created() {
+                axios.get('https://developer.duyiedu.com/vue/bz/video', {
+                    params: {
+                        start: 0,
+                        offset: 12
+                    }
+                }).then(res => {
+                    if (res.status === 200) {
+                        this.videoList = res.data.data;
+                    }
+                })
+            }
+
+        })
+    </script>
+</body>
+
+</html>
